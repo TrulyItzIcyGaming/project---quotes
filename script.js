@@ -61,7 +61,12 @@ const quotes = [
 }
 
 function displayQuote() {
-    const quote = getRandomQuote();
+    const today = new Date().toISOString().slice(0, 10);
+    let quote = localStorage.getItem(today);
+    if (!quote) {
+        quote = getRandomQuote();
+        localStorage.setItem(today, quote);
+    }
     document.getElementById('quote').innerText = quote;
 }
 
